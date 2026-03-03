@@ -13,49 +13,104 @@ const userRoutes = require('./routes/user');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
+/*
+==============================
+FIX RENDER PROXY
+==============================
+*/
+app.set("trust proxy", 1);
+
+/*
+==============================
+MIDDLEWARE
+==============================
+*/
 app.use(cors({
   origin: true,
   credentials: true
 }));
+
 app.use(express.json());
 app.use(cookieParser());
 
-// Rate limiting
+/*
+==============================
+RATE LIMIT
+==============================
+*/
 const limiter = rateLimit({
-  windowMs: 1 * 60 * 1000, // 1 minute
-  max: 20, // 20 requests per minute
+  windowMs: 60 * 1000,
+  max: 20,
   message: { error: 'Too many requests, please try again later' }
 });
+
 app.use('/api/chat/send', limiter);
 
-// Serve static frontend
+/*
+==============================
+STATIC FRONTEND
+==============================
+*/
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-// API Routes
+/*
+==============================
+API ROUTES
+==============================
+*/
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/user', userRoutes);
 
-// Health check
+/*
+==============================
+HEALTH CHECK
+==============================
+*/
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  res.json({
+    status: 'ok',
+    timestamp: new Date().toISOString()
+  });
 });
 
-// SPA fallback - serve index.html for non-API routes
+/*
+==============================
+ROOT → SPLASH PAGE
+==============================
+*/
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'pages', 'splash.html'));
+});
+
+/*
+==============================
+SPA FALLBACK
+==============================
+*/
 app.get('*', (req, res) => {
   if (!req.path.startsWith('/api')) {
-    res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, '..', 'public', 'pages', 'splash.html'));
   }
 });
 
-// Error handling middleware
+/*
+==============================
+ERROR HANDLER
+==============================
+*/
 app.use((err, req, res, next) => {
   console.error('Server error:', err);
-  res.status(500).json({ error: 'Internal server error' });
+  res.status(500).json({
+    error: 'Internal server error'
+  });
 });
 
-// Start server
+/*
+==============================
+START SERVER
+==============================
+*/
 app.listen(PORT, () => {
   console.log(`AURIA server running on port ${PORT}`);
   console.log(`Frontend: http://localhost:${PORT}`);
