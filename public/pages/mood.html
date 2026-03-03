@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Are You Feeling? — AURIA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/app.css">
+</head>
+<body>
+  <div class="background-layer" style="background-image: url('https://i.imgur.com/83VtoCm.jpeg');"></div>
+  
+  <nav class="nav">
+    <a href="../index.html" class="nav-logo">
+      <img src="https://i.imgur.com/vtzAk7r.jpeg" alt="AURIA">
+      AURIA
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="chat.html">Chat</a></li>
+      <li><a href="mood.html" class="active">Mood</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="what.html">What AURIA Does</a></li>
+      <li><a href="history.html">History</a></li>
+      <li><a href="settings.html">Settings</a></li>
+    </ul>
+    <button class="nav-burger" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+  
+  <div class="nav-mobile">
+    <a href="../index.html">Home</a>
+    <a href="chat.html">Chat</a>
+    <a href="mood.html">Mood</a>
+    <a href="about.html">About</a>
+    <a href="what.html">What AURIA Does</a>
+    <a href="history.html">History</a>
+    <a href="settings.html">Settings</a>
+  </div>
+
+  <main class="main-content">
+    <div class="mood-container">
+      <div class="mood-selection">
+        <h1 class="mood-title">How are you feeling?</h1>
+        <p class="mood-subtitle">Select the mood that best describes how you feel right now</p>
+        
+        <div class="mood-grid">
+          <div class="mood-option" data-mood="sad">
+            <span class="mood-icon">😢</span>
+            <span class="mood-label">Sad</span>
+          </div>
+          <div class="mood-option" data-mood="anxious">
+            <span class="mood-icon">😰</span>
+            <span class="mood-label">Anxious</span>
+          </div>
+          <div class="mood-option" data-mood="calm">
+            <span class="mood-icon">😌</span>
+            <span class="mood-label">Calm</span>
+          </div>
+          <div class="mood-option" data-mood="angry">
+            <span class="mood-icon">😤</span>
+            <span class="mood-label">Angry</span>
+          </div>
+          <div class="mood-option" data-mood="motivated">
+            <span class="mood-icon">💪</span>
+            <span class="mood-label">Motivated</span>
+          </div>
+        </div>
+        
+        <div class="mt-xl">
+          <button class="btn btn-primary btn-lg mood-confirm-btn">Continue</button>
+        </div>
+      </div>
+      
+      <div class="mood-confirmation hidden">
+        <img src="https://i.imgur.com/vtzAk7r.jpeg" alt="AURIA" class="splash-avatar" style="width: 80px; height: 80px; margin-bottom: 1rem;">
+        <h2>I'm here with you</h2>
+        <p>Let's take it slowly. I'm ready to listen.</p>
+        <a href="chat.html" class="btn btn-primary btn-lg mt-lg">Go to Chat</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    AURIA — calm companion
+  </footer>
+
+  <script src="../js/app.js"></script>
+</body>
+</html>
