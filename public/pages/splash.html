@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURIA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/app.css">
+  <style>
+    .splash-nav { display: none; }
+    .splash-footer { display: none; }
+  </style>
+</head>
+<body>
+  <div class="background-layer" style="background-image: url('https://i.imgur.com/If17DZh.jpeg');"></div>
+
+  <div class="splash-container">
+    <img src="https://i.imgur.com/vtzAk7r.jpeg" alt="AURIA" class="splash-avatar">
+    <h1 class="splash-title shimmer">AURIA</h1>
+    <p class="splash-subtitle">A calm space to breathe, talk, and heal.</p>
+  </div>
+
+  <script>
+    // Auto redirect after 2.5 seconds
+    setTimeout(function() {
+      // Check if user is logged in, go to chat, otherwise go to index
+      const userName = localStorage.getItem('auria_user_name');
+      if (userName) {
+        window.location.href = 'chat.html';
+      } else {
+        window.location.href = '../index.html';
+      }
+    }, 2500);
+  </script>
+</body>
+</html>
