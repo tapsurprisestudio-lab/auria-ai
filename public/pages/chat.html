@@ -1,104 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chat — AURIA</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/app.css">
-  <style>
-    .chat-container .background-layer { display: none; }
-  </style>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AURIA Chat</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/app.css">
+
+<style>
+
+.chat-layout{
+display:flex;
+height:100vh;
+}
+
+.sidebar{
+width:260px;
+background:rgba(20,25,35,0.85);
+backdrop-filter:blur(10px);
+border-right:1px solid rgba(255,255,255,0.05);
+display:flex;
+flex-direction:column;
+padding:20px;
+}
+
+.sidebar h2{
+margin-bottom:20px;
+}
+
+.sidebar button{
+margin-bottom:10px;
+}
+
+.chat-area{
+flex:1;
+display:flex;
+flex-direction:column;
+}
+
+.chat-messages{
+flex:1;
+overflow-y:auto;
+padding:20px;
+}
+
+</style>
+
 </head>
+
 <body>
-  <!-- Navigation -->
-  <nav class="nav">
-    <a href="../index.html" class="nav-logo">
-      <img src="https://i.imgur.com/vtzAk7r.jpeg" alt="AURIA">
-      AURIA
-    </a>
-    <ul class="nav-links">
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="chat.html" class="active">Chat</a></li>
-      <li><a href="mood.html">Mood</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="what.html">What AURIA Does</a></li>
-      <li><a href="history.html">History</a></li>
-      <li><a href="settings.html">Settings</a></li>
-    </ul>
-    <button class="nav-burger" aria-label="Menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </nav>
-  
-  <!-- Mobile Nav -->
-  <div class="nav-mobile">
-    <a href="../index.html">Home</a>
-    <a href="chat.html">Chat</a>
-    <a href="mood.html">Mood</a>
-    <a href="about.html">About</a>
-    <a href="what.html">What AURIA Does</a>
-    <a href="history.html">History</a>
-    <a href="settings.html">Settings</a>
-  </div>
 
-  <!-- Background for Chat -->
-  <div class="background-layer chat-bg"></div>
+<div class="background-layer chat-bg"></div>
 
-  <style>
-    @media (max-width: 768px) {
-      .chat-bg { background-image: url('https://i.imgur.com/RTkwPYd.jpeg') !important; }
-    }
-    @media (min-width: 769px) {
-      .chat-bg { background-image: url('https://i.imgur.com/F4sx2S1.jpeg') !important; }
-    }
-  </style>
+<div class="chat-layout">
 
-  <!-- Main Content -->
-  <main class="main-content">
-    <div class="chat-container">
-      <div class="chat-header">
-        <div class="chat-header-info">
-          <img src="https://i.imgur.com/vtzAk7r.jpeg" alt="AURIA" class="chat-avatar">
-          <div class="chat-header-text">
-            <h3>AURIA</h3>
-            <p>Calm companion</p>
-          </div>
-        </div>
-        <button class="btn btn-ghost btn-sm focus-mode-btn">Focus Mode</button>
-      </div>
-      
-      <div class="chat-messages">
-        <!-- Messages will be inserted here by JavaScript -->
-      </div>
-      
-      <div class="chat-input-area">
-        <input type="text" class="form-input chat-input" placeholder="Share what's on your mind...">
-        <button class="btn btn-primary chat-send-btn">Send</button>
-      </div>
-    </div>
-  </main>
+<!-- SIDEBAR -->
 
-  <!-- Footer -->
-  <footer class="footer">
-    AURIA — calm companion
-  </footer>
+<div class="sidebar">
 
-  <script src="../js/app.js"></script>
-  <script>
-    // Set background after page loads
-    document.addEventListener('DOMContentLoaded', function() {
-      const bg = document.querySelector('.chat-bg');
-      if (window.innerWidth <= 768) {
-        bg.style.backgroundImage = "url('https://i.imgur.com/RTkwPYd.jpeg')";
-      } else {
-        bg.style.backgroundImage = "url('https://i.imgur.com/F4sx2S1.jpeg')";
-      }
-    });
-  </script>
+<h2>AURIA</h2>
+
+<button class="btn btn-primary" onclick="showChat()">Chat</button>
+
+<button class="btn btn-ghost" onclick="showHistory()">History</button>
+
+<button class="btn btn-ghost" onclick="showSettings()">Settings</button>
+
+<button class="btn btn-ghost" onclick="location.href='mood.html'">Mood</button>
+
+<button class="btn btn-ghost" onclick="logout()">Logout</button>
+
+</div>
+
+<!-- CHAT AREA -->
+
+<div class="chat-area">
+
+<div class="chat-header">
+
+<div class="chat-header-info">
+
+<img src="https://i.imgur.com/vtzAk7r.jpeg" class="chat-avatar">
+
+<div>
+
+<h3>AURIA</h3>
+<p>Calm companion</p>
+
+</div>
+
+</div>
+
+<button class="btn btn-ghost btn-sm focus-mode-btn">Focus Mode</button>
+
+</div>
+
+<div class="chat-messages" id="chatMessages">
+
+</div>
+
+<div class="chat-input-area">
+
+<input
+type="text"
+class="form-input chat-input"
+placeholder="Share what's on your mind..."
+>
+
+<button class="btn btn-primary chat-send-btn">
+Send
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<footer class="footer">
+AURIA — calm companion
+</footer>
+
+<script src="../js/app.js"></script>
+
+<script>
+
+function showChat(){
+
+document.getElementById("chatMessages").innerHTML="";
+
+}
+
+function showHistory(){
+
+document.getElementById("chatMessages").innerHTML=`
+<h3>Conversation History</h3>
+<p>Your past conversations will appear here.</p>
+`;
+
+}
+
+function showSettings(){
+
+document.getElementById("chatMessages").innerHTML=`
+
+<h3>Settings</h3>
+
+<button onclick="toggleComfort()">Comfort Mode</button>
+
+<button onclick="logout()">Logout</button>
+
+`;
+
+}
+
+function toggleComfort(){
+
+document.body.classList.toggle("comfort");
+
+}
+
+function logout(){
+
+localStorage.clear();
+
+window.location.href="login.html";
+
+}
+
+</script>
+
 </body>
 </html>
