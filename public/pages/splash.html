@@ -4,35 +4,96 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AURIA</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="../css/app.css">
+
   <style>
-    .splash-nav { display: none; }
-    .splash-footer { display: none; }
+
+  body{
+    overflow:hidden;
+  }
+
+  .splash-container{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+  }
+
+  .splash-avatar{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    margin-bottom:25px;
+    box-shadow:0 0 30px rgba(120,200,255,0.5);
+    animation: pulse 4s infinite;
+  }
+
+  @keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.05);}
+    100%{transform:scale(1);}
+  }
+
+  .splash-title{
+    font-size:46px;
+    font-weight:700;
+    letter-spacing:4px;
+  }
+
+  .splash-subtitle{
+    opacity:.8;
+    margin-top:10px;
+  }
+
   </style>
+
 </head>
+
 <body>
-  <div class="background-layer" style="background-image: url('https://i.imgur.com/If17DZh.jpeg');"></div>
 
-  <div class="splash-container">
-    <img src="https://i.imgur.com/vtzAk7r.jpeg" alt="AURIA" class="splash-avatar">
-    <h1 class="splash-title shimmer">AURIA</h1>
-    <p class="splash-subtitle">A calm space to breathe, talk, and heal.</p>
-  </div>
+<div class="background-layer"
+style="background-image:url('https://i.imgur.com/If17DZh.jpeg')">
+</div>
 
-  <script>
-    // Auto redirect after 2.5 seconds
-    setTimeout(function() {
-      // Check if user is logged in, go to chat, otherwise go to index
-      const userName = localStorage.getItem('auria_user_name');
-      if (userName) {
-        window.location.href = 'chat.html';
-      } else {
-        window.location.href = '../index.html';
-      }
-    }, 2500);
-  </script>
+<div class="splash-container">
+
+<img src="https://i.imgur.com/vtzAk7r.jpeg" class="splash-avatar">
+
+<h1 class="splash-title shimmer">AURIA</h1>
+
+<p class="splash-subtitle">
+A calm space to breathe, talk, and heal
+</p>
+
+</div>
+
+<script>
+
+setTimeout(function(){
+
+const userName = localStorage.getItem("auria_user_name");
+
+if(userName){
+
+window.location.href="/pages/chat.html";
+
+}else{
+
+window.location.href="/pages/login.html";
+
+}
+
+},2500);
+
+</script>
+
 </body>
 </html>
