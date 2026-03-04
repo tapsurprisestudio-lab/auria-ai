@@ -1,59 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AURIA</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>AURIA</title>
 
-  <link rel="stylesheet" href="../css/app.css">
+<link rel="stylesheet" href="../css/app.css">
 
-  <style>
+<style>
 
-  body{
-    overflow:hidden;
-  }
+body{
+margin:0;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+font-family:Inter, sans-serif;
+}
 
-  .splash-container{
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-  }
+.splash{
+text-align:center;
+}
 
-  .splash-avatar{
-    width:110px;
-    height:110px;
-    border-radius:50%;
-    margin-bottom:25px;
-    box-shadow:0 0 30px rgba(120,200,255,0.5);
-    animation: pulse 4s infinite;
-  }
+.avatar{
+width:120px;
+border-radius:100px;
+box-shadow:0 0 40px rgba(120,200,255,0.6);
+margin-bottom:20px;
+}
 
-  @keyframes pulse{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.05);}
-    100%{transform:scale(1);}
-  }
+.title{
+font-size:42px;
+letter-spacing:6px;
+}
 
-  .splash-title{
-    font-size:46px;
-    font-weight:700;
-    letter-spacing:4px;
-  }
+.subtitle{
+opacity:0.7;
+margin-top:10px;
+}
 
-  .splash-subtitle{
-    opacity:.8;
-    margin-top:10px;
-  }
-
-  </style>
+</style>
 
 </head>
 
@@ -63,13 +51,13 @@
 style="background-image:url('https://i.imgur.com/If17DZh.jpeg')">
 </div>
 
-<div class="splash-container">
+<div class="splash">
 
-<img src="https://i.imgur.com/vtzAk7r.jpeg" class="splash-avatar">
+<img src="https://i.imgur.com/vtzAk7r.jpeg" class="avatar">
 
-<h1 class="splash-title shimmer">AURIA</h1>
+<h1 class="title">AURIA</h1>
 
-<p class="splash-subtitle">
+<p class="subtitle">
 A calm space to breathe, talk, and heal
 </p>
 
@@ -79,9 +67,9 @@ A calm space to breathe, talk, and heal
 
 setTimeout(function(){
 
-const userName = localStorage.getItem("auria_user_name");
+const user = localStorage.getItem("auria_user_name");
 
-if(userName){
+if(user){
 
 window.location.href="/pages/chat.html";
 
