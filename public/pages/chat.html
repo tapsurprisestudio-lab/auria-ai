@@ -8,11 +8,6 @@
 
 <title>AURIA Chat</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="../css/app.css">
 
 <style>
@@ -23,17 +18,11 @@ height:100vh;
 }
 
 .sidebar{
-width:260px;
-background:rgba(20,25,35,0.85);
-backdrop-filter:blur(10px);
-border-right:1px solid rgba(255,255,255,0.05);
+width:250px;
+background:#111827;
+padding:20px;
 display:flex;
 flex-direction:column;
-padding:20px;
-}
-
-.sidebar h2{
-margin-bottom:20px;
 }
 
 .sidebar button{
@@ -62,60 +51,38 @@ padding:20px;
 
 <div class="chat-layout">
 
-<!-- SIDEBAR -->
-
 <div class="sidebar">
 
 <h2>AURIA</h2>
 
-<button class="btn btn-primary" onclick="showChat()">Chat</button>
+<button onclick="showChat()">Chat</button>
 
-<button class="btn btn-ghost" onclick="showHistory()">History</button>
+<button onclick="showHistory()">History</button>
 
-<button class="btn btn-ghost" onclick="showSettings()">Settings</button>
+<button onclick="showSettings()">Settings</button>
 
-<button class="btn btn-ghost" onclick="location.href='mood.html'">Mood</button>
-
-<button class="btn btn-ghost" onclick="logout()">Logout</button>
+<button onclick="logout()">Logout</button>
 
 </div>
-
-<!-- CHAT AREA -->
 
 <div class="chat-area">
 
 <div class="chat-header">
 
-<div class="chat-header-info">
-
-<img src="https://i.imgur.com/vtzAk7r.jpeg" class="chat-avatar">
-
-<div>
-
 <h3>AURIA</h3>
-<p>Calm companion</p>
 
 </div>
 
-</div>
-
-<button class="btn btn-ghost btn-sm focus-mode-btn">Focus Mode</button>
-
-</div>
-
-<div class="chat-messages" id="chatMessages">
-
-</div>
+<div class="chat-messages" id="chatMessages"></div>
 
 <div class="chat-input-area">
 
-<input
-type="text"
+<input type="text"
 class="form-input chat-input"
 placeholder="Share what's on your mind..."
 >
 
-<button class="btn btn-primary chat-send-btn">
+<button class="chat-send-btn">
 Send
 </button>
 
@@ -125,13 +92,25 @@ Send
 
 </div>
 
-<footer class="footer">
-AURIA — calm companion
-</footer>
-
 <script src="../js/app.js"></script>
 
 <script>
+
+/*
+CHECK LOGIN
+*/
+
+const user = localStorage.getItem("auria_user_name");
+
+if(!user){
+
+window.location.href="login.html";
+
+}
+
+/*
+SIDEBAR FUNCTIONS
+*/
 
 function showChat(){
 
@@ -141,10 +120,15 @@ document.getElementById("chatMessages").innerHTML="";
 
 function showHistory(){
 
-document.getElementById("chatMessages").innerHTML=`
-<h3>Conversation History</h3>
-<p>Your past conversations will appear here.</p>
-`;
+const chats = JSON.parse(localStorage.getItem("auria_conversations")) || [];
+
+let html="<h3>Conversation History</h3>";
+
+chats.forEach(c=>{
+html += `<p>${c.message}</p>`;
+});
+
+document.getElementById("chatMessages").innerHTML=html;
 
 }
 
@@ -170,7 +154,7 @@ document.body.classList.toggle("comfort");
 
 function logout(){
 
-localStorage.clear();
+localStorage.removeItem("auria_user_name");
 
 window.location.href="login.html";
 
